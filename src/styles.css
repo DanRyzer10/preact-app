@@ -1,0 +1,24 @@
+.card-registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .card-input {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .submit-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }

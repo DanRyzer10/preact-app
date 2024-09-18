@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Button Test</title>
+</head>
+<body>
+    <h1>Payment Button Test</h1>
+    <div id="iss-checkout"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new ISSPaymentButton({
+                apiKey: 'test-key',
+                currency: 'USD'
+            });
+        });
+    </script>
+
+    <style>
+   .card-registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.submit-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+    </style>
+</body>
+</html>
