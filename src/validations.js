@@ -1,5 +1,5 @@
 export function validateCardNumber(cardNumber) {
-    const regex = /^\d{16}$/;
+    const regex = /^\d{14}$/;
     return regex.test(cardNumber) ? '' : 'Número de tarjeta inválido';
   }
   

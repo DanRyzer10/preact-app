@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://localhost:3000/api/static/web.js" >
+
+    </script>
+    <link rel="stylesheet" href="http://localhost:3000/api/static/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="iss-checkout">
+
+    </div>
+    <script type="module">
+        new ISSPaymentButton({
+                currency: 'USD',
+                amount:56000,
+                company_name:'test company',
+                onRedirect: (data) => {
+                  const baseUrl = 'http://localhost:3000/response/success'
+                  const queryParams = new URLSearchParams(data).toString();
+                  const fullUrl = `${baseUrl}?${queryParams}`;
+                  window.location.href = fullUrl;
+                  console.log(data);
+                }
+            });
+    </script>
+</body>
+</html>
