@@ -86,12 +86,24 @@ function PaymentButton({ config, services }) {
         body: JSON.stringify(payload),
       });
       const data = await response.json();
+      if(data.code ===103){
+        const challengeUrl = data.detail.url;
+        const params = data.detail.parameters;
+        console.log(params);
+        console.log(challengeUrl);
+        const queryParams = params.map(param => `${encodeURIComponent(param.name)}=${encodeURIComponent(param.value)}`).join('&');
+        console.log(queryParams);
+        const fullUrl = `${challengeUrl}&${queryParams}`;
+        window.location.href = `http://localhost:3000/auth/validator3ds?challengeUrl=${encodeURIComponent(fullUrl)}`;
+      }
       if (data.code === 100) {
         setIsVisibleModal(true);
         setOtpDetails(data.detail)
+
       }
       if(data.code === 0){
         config.onRedirect(data.detail)
+        return;
       }
       console.log(data);
     } catch (error) {
@@ -165,7 +177,7 @@ function PaymentButton({ config, services }) {
           error={errors.cvv}
         />
         <button type="submit" className="submit-button" disabled={processing}>
-          {processing ? "Processing..." : `Register Card (${config.currency})`}
+          {processing ? "Procesando..." : `Registrar tarjeta (${config.currency})`}
         </button>
       </form>
     </div>
@@ -174,19 +186,19 @@ function PaymentButton({ config, services }) {
 
 class ISSPaymentButton {
   constructor(config) {
-    this.config = {
+    this._config = {
       apiKey: "",
       currency: "USD",
       amount: "34,32",
       description: "Pago de servicios",
       ...config,
     };
-    this.container = document.getElementById("iss-checkout");
-    this.services = {
+    this._container = document.getElementById("iss-checkout");
+    this._services = {
       service_key: "http://localhost:3000/api/key",
       service_bridge: "http://localhost:3000/api/webcheckout/bridge-data",
     };
-    if (!this.container) {
+    if (!this._container) {
       console.error("Container #iss-checkout not found");
       return;
     }
@@ -195,13 +207,22 @@ class ISSPaymentButton {
 
   render() {
     render(
-      <PaymentButton config={this.config} services={this.services} />,
-      this.container
+      <PaymentButton config={this._config} services={this._services} />,
+      this._container
     );
   }
   updateConfig(newConfig) {
-    this.config = { ...this.config, ...newConfig };
+    this._config = { ...this._config, ...newConfig };
     this.render();
+  }
+  get config() {
+    return this._config;
+  }
+  get container() {
+    return this._container;
+  }
+  get services() {
+    return this._services;
   }
 }
 
