@@ -18,7 +18,7 @@ export function OtpModal({open,onAction,onOtpChange}) {
     }
 
     return (
-        <dialog open={visible} >
+        <dialog className='modal-container' open={visible} >
             <div className="modal-content">
                 <h2>OTP Verification</h2>
                 <p>Enter the OTP sent to your mobile number</p>

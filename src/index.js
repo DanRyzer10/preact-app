@@ -102,7 +102,7 @@ function PaymentButton({ config, services }) {
 
       }
       if(data.code === 0){
-        config.onRedirect(data.detail)
+       onRedirect(config.redirectUrl,data.detail);
         return;
       }
       console.log(data);
@@ -116,6 +116,13 @@ function PaymentButton({ config, services }) {
       setErrors({ cardNumber: "", expiryDate: "", cvv: "" });
     }
   };
+
+  const onRedirect = (url,data) =>{
+    const baseUrl = url;
+    const queryParams = new URLSearchParams(data).toString();
+    const fullUrl = `${baseUrl}?${queryParams}`;
+    window.location.href = fullUrl;
+  }
   
   const handleSubmit = async (e) => {
     e.preventDefault();
