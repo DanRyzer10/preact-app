@@ -12,6 +12,7 @@ export function ExpiryDateInput({ value, onInput, error }) {
 
   return (
     <div className="input-group">
+      <label htmlFor="cvv-card">CVV</label>
       <input
         type="text"
         value={value}
@@ -19,6 +20,7 @@ export function ExpiryDateInput({ value, onInput, error }) {
         placeholder="Expiry Date (MM/YY)"
         className={`card-input ${error ? 'input-error' : ''}`}
         required
+        id='cvv-card'
       />
       {error && <span className="error-message">{error}</span>}
     </div>

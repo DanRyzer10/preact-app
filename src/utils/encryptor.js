@@ -11,7 +11,7 @@ export default class Encryptor {
   }
 
   encrypt(plaintText) {
-    const key = Base64.parse(this.#key); // Decodifica la clave desde base64
+    const key = Base64.parse(this.#key);
     const encrypted = AES.encrypt(plaintText, key, {
       mode: ECB,
       padding: Pkcs7

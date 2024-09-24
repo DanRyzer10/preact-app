@@ -10,6 +10,7 @@ export function CVVInput({ value, onInput, error }) {
 
   return (
     <div className="input-group">
+      <label htmlFor="expired-date">Vencimiento</label>
       <input
         type="password"
         value={value}
@@ -17,6 +18,7 @@ export function CVVInput({ value, onInput, error }) {
         placeholder="CVV"
         className={`card-input ${error ? 'input-error' : ''}`}
         required
+        id='expired-date'
       />
       {error && <span className="error-message">{error}</span>}
     </div>
